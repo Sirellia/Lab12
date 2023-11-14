@@ -1,0 +1,41 @@
+#Вычислить сумму знакопеременного ряда |х*2n!|/(2n)!, 
+# где х-матрица размера к (к и матрица задаются случайным образом), n - номер слагаемого. 
+# #Сумма считается вычисленной, если точность вычислений будет не меньше t знаков после запятой. 
+# У алгоритма д.б. линейная сложность. Знак первого слагаемого  -.
+
+import numpy as np
+
+def alternating_series_sum(det_x, t):
+    n = 0  # Начальное значение
+    current_sum = 0.0  # Инициализация текущей суммы
+    # Добавляем первый элемент с отрицательным знаком
+    first_term = (-1) * (det_x * (2 * np.math.factorial(0))) / np.math.factorial(2 * 0)
+    current_sum += first_term
+    while True:
+        term = (det_x * (2 * np.math.factorial(n + 1))) / np.math.factorial(
+            2 * (n + 1))  # Вычисляем очередное слагаемое
+        if (n + 1) % 2 == 0:
+            current_sum += term  # Добавляем слагаемое с положительным знаком
+        else:
+            current_sum -= term  # Добавляем слагаемое с отрицательным знаком
+
+        if abs(term) < t:  # Проверяем точность
+            break
+        n += 1  # Увеличиваем номер слагаемого
+    return current_sum
+#Вводим кол-во чисел после запятой
+while True:
+    desired_precision = float(input("Введите желаемую точность вычислений (не равную нулю): "))
+    if desired_precision == 0:
+        print("Ошибка: значение точности не может быть равным нулю. Пожалуйста, введите другое значение.")
+    else:
+        break
+#Случайный размер матрицы и её заполнение случайными значениями от -1 до 1
+size = np.random.randint(2, 6)
+random_matrix = np.random.uniform(-1, 1, (size, size))
+#Находим определитель матрицы и подсчитываем и выводим результат
+det_x = np.linalg.det(random_matrix)
+precision_format = "{:." + str(int(desired_precision)) + "f}"
+result = alternating_series_sum(det_x, desired_precision)
+
+print(f"Сумма знакопеременного ряда: {precision_format.format(result)}")
