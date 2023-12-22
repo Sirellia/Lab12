@@ -21,7 +21,7 @@ print(f"Матрица: \n{x}")
 print(f"Определитель: {np.linalg.det(x)}")
 #вычисление суммы знакопеременного ряда
 n = 1
-before_digit, result, accuracy = 0, 0, 1
+result= 0
 fact_denominator, fact_numerator = 1, 1
 sign = -1
 while True:
