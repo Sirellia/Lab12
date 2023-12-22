@@ -33,6 +33,6 @@ while abs(accuracy) > (0.1 ** t):
     accuracy = abs(before_digit - result)
     before_digit = 0
     sign *= -1
-print(f"\nИтоговая сумма: {result}")
+print(f"\nИтоговая сумма: {result:.{t}f}")
 print(f"Кол-во итераций: {n-1}")
 
