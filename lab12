@@ -23,14 +23,21 @@ print(f"Определитель: {np.linalg.det(x)}")
 n = 1
 before_digit, result, accuracy = 0, 0, 1
 fact_denominator, fact_numerator = 1, 1
-while abs(accuracy) > (0.1**t):
-    before_digit += result
+sign = -1
+while True:
     fact_numerator = (2 * n - 1) * (2 * n)
     fact_denominator *= (2 * n - 1) * (2 * n)
-    result += abs(np.linalg.det(x*fact_numerator).astype("float64")) / fact_denominator
+    term = np.abs(np.linalg.det(x * fact_numerator)) / fact_denominator
+    result += sign * term
+
+    # Проверка точности
+    if round(term, t) == 0:
+        break
+
+    # Смена знака
+    sign *= -1
     n += 1
-    accuracy = abs(before_digit - result)
-    before_digit = 0
+
 #Вывод результатов
 print(f"\nИтоговая сумма: {result:.{t}f}")
-print(f"Кол-во итераций: {n-1}")
+print(f"Кол-во итераций: {n}")
