@@ -36,5 +36,3 @@ while abs(accuracy) > (0.1 ** t):
 print(f"\nИтоговая сумма: {result}")
 print(f"Кол-во итераций: {n-1}")
 
-print(f"\nИтоговая сумма: {result}")
-print(f"Кол-во итераций: {n-1}")
